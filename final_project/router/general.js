@@ -34,9 +34,13 @@ public_users.get('/isbn/:isbn', function (req, res) {
   const isbn = req.params.isbn;
 
   if (books[isbn]) {
+
     return res.json(books[isbn]);
+
   } else {
+
     return res.status(404).json({ message: "Book not found" });
+
   }
 
 });
@@ -46,9 +50,13 @@ public_users.get('/isbn/:isbn', function (req, res) {
 
 public_users.get('/author/:author', function (req, res) {
 
-  //Write your code here
+  const author = req.params.author;
 
-  return res.status(300).json({message: "Yet to be implemented"});
+  const booksByAuthor = Object.values(books).filter(
+    book => book.author.toLowerCase() === author.toLowerCase()
+  );
+
+  return res.json(booksByAuthor);
 
 });
 
