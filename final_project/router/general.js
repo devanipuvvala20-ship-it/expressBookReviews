@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 
 let books = require("./booksdb.js");
 
@@ -126,4 +127,100 @@ public_users.get('/review/:isbn', function (req, res) {
 });
 
 
+// ======================================================
+// TASK 10 - Get all books using Axios and async/await
+// ======================================================
+
+async function getAllBooks() {
+
+  try {
+
+    const response = await axios.get('http://localhost:5000/');
+
+    return response.data;
+
+  } catch (error) {
+
+    console.error("Error getting all books:", error.message);
+
+  }
+
+}
+
+
+// ======================================================
+// TASK 11 - Get book details by ISBN using Axios
+// ======================================================
+
+async function getBookByISBN(isbn) {
+
+  try {
+
+    const response = await axios.get(
+      `http://localhost:5000/isbn/${isbn}`
+    );
+
+    return response.data;
+
+  } catch (error) {
+
+    console.error("Error getting book by ISBN:", error.message);
+
+  }
+
+}
+
+
+// ======================================================
+// TASK 12 - Get books by Author using Axios
+// ======================================================
+
+async function getBooksByAuthor(author) {
+
+  try {
+
+    const response = await axios.get(
+      `http://localhost:5000/author/${encodeURIComponent(author)}`
+    );
+
+    return response.data;
+
+  } catch (error) {
+
+    console.error("Error getting books by author:", error.message);
+
+  }
+
+}
+
+
+// ======================================================
+// TASK 13 - Get books by Title using Axios
+// ======================================================
+
+async function getBooksByTitle(title) {
+
+  try {
+
+    const response = await axios.get(
+      `http://localhost:5000/title/${encodeURIComponent(title)}`
+    );
+
+    return response.data;
+
+  } catch (error) {
+
+    console.error("Error getting books by title:", error.message);
+
+  }
+
+}
+
+
 module.exports.general = public_users;
+
+// Export async functions for Tasks 10-13
+module.exports.getAllBooks = getAllBooks;
+module.exports.getBookByISBN = getBookByISBN;
+module.exports.getBooksByAuthor = getBooksByAuthor;
+module.exports.getBooksByTitle = getBooksByTitle;
