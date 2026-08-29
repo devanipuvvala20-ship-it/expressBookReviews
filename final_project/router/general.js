@@ -9,11 +9,38 @@ let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
 
+// Register a new user
 public_users.post("/register", (req, res) => {
 
-  //Write your code here
+  const username = req.body.username;
+  const password = req.body.password;
 
-  return res.status(300).json({message: "Yet to be implemented"});
+  if (username && password) {
+
+    if (!users.find(user => user.username === username)) {
+
+      users.push({
+        username: username,
+        password: password
+      });
+
+      return res.status(200).json({
+        message: "User successfully registered. Now you can login"
+      });
+
+    } else {
+
+      return res.status(409).json({
+        message: "User already exists"
+      });
+
+    }
+
+  }
+
+  return res.status(400).json({
+    message: "Username and password are required"
+  });
 
 });
 
@@ -39,7 +66,9 @@ public_users.get('/isbn/:isbn', function (req, res) {
 
   } else {
 
-    return res.status(404).json({ message: "Book not found" });
+    return res.status(404).json({
+      message: "Book not found"
+    });
 
   }
 
@@ -88,7 +117,9 @@ public_users.get('/review/:isbn', function (req, res) {
 
   } else {
 
-    return res.status(404).json({ message: "Book not found" });
+    return res.status(404).json({
+      message: "Book not found"
+    });
 
   }
 
