@@ -1,0 +1,2 @@
+curl -X PUT http://localhost:5000/customer/auth/review/1 -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJldmlld3VzZXIiLCJpYXQiOjE3ODgwMjkxNjAsImV4cCI6MTc4ODAzMjc2MH0.-D5tE3svgIYamroouA7eLlFV8MNkElcGLgC3EMgRDJg" -d '{"review":"This is a great book"}'
+{"message":"Review added successfully","reviews":{"reviewuser":"This is a great book"}}
